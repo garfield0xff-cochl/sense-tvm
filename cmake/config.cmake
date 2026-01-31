@@ -257,6 +257,21 @@ set(USE_SORT ON)
 set(USE_ARM_COMPUTE_LIB OFF)
 set(USE_ARM_COMPUTE_LIB_GRAPH_EXECUTOR OFF)
 
+# Whether to use XNNPACK library for optimized neural network operators
+# XNNPACK provides NEON-optimized operators for ARM (including Raspberry Pi)
+#
+# Possible values:
+# - ON: enable XNNPACK, find library in system paths or 3rdparty/XNNPACK/build
+# - OFF: disable XNNPACK
+# - /path/to/xnnpack: use XNNPACK from specific path
+#
+# To build XNNPACK manually:
+#   cd 3rdparty/XNNPACK
+#   mkdir build && cd build
+#   cmake -DXNNPACK_BUILD_TESTS=OFF -DXNNPACK_BUILD_BENCHMARKS=OFF ..
+#   make -j4
+set(USE_XNNPACK OFF)
+
 # Whether to build with TensorRT codegen or runtime
 # Examples are available here: docs/deploy/tensorrt.rst.
 #

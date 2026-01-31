@@ -22,6 +22,7 @@
 [Community](https://tvm.apache.org/community) |
 [Release Notes](NEWS.md)
 
+
 Apache TVM is an open machine learning compilation framework,
 following the following principles:
 
@@ -37,6 +38,12 @@ Getting Started
 Check out the [TVM Documentation](https://tvm.apache.org/docs/) site for installation instructions, tutorials, examples, and more.
 The [Getting Started with TVM](https://tvm.apache.org/docs/get_started/overview.html) tutorial is a great
 place to start.
+
+```
+pip install -e python/
+pip install -e tvm-ffi/
+pip install cloudpickle xgboost ml_dtypes psutil
+```
 
 Contribute to TVM
 -----------------
