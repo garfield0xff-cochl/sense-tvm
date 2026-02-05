@@ -41,7 +41,7 @@ class CodeGenCHost : public CodeGenC {
  public:
   CodeGenCHost();
   void Init(bool output_ssa, bool emit_asserts, bool emit_fwd_func_decl, std::string target_str,
-            const std::unordered_set<std::string>& devices);
+            const std::unordered_set<std::string>& devices, bool standalone_mode = false);
 
   void InitGlobalContext();
 
@@ -68,6 +68,10 @@ class CodeGenCHost : public CodeGenC {
   void VisitExpr_(const MinNode* op, std::ostream& os) final;  // NOLINT(*)
   void VisitExpr_(const MaxNode* op, std::ostream& os) final;  // NOLINT(*)
 
+  void PrintCallExtern(Type ret_type, ffi::String global_symbol,
+                       const ffi::Array<PrimExpr>& args, bool skip_first_arg,
+                       std::ostream& os) override;  // NOLINT(*)
+
   void VisitStmt_(const AssertStmtNode* op) final;  // NOLINT(*)
 
   void GenerateForwardFunctionDeclarations(ffi::String global_symbol,
@@ -87,6 +91,8 @@ class CodeGenCHost : public CodeGenC {
   bool emit_fwd_func_decl_;
   /*! \brief whether to generate the entry function if encountered */
   bool has_main_func_ = false;
+  /*! \brief whether to generate standalone C code without TVM runtime dependencies */
+  bool standalone_mode_ = false;
 
   std::string GetPackedName(const CallNode* op);
   void PrintGetFuncFromBackend(const std::string& func_name, const std::string& packed_func_name);

@@ -322,6 +322,8 @@ class CodeGenC : public ExprFunctor<void(const PrimExpr&, std::ostream&)>,
   bool print_ssa_form_{false};
   /*! \brief whether the module has a main function declared */
   bool has_tvm_ffi_main_func_{false};
+  /*! \brief whether to generate standalone C code without TVM runtime dependencies */
+  bool standalone_mode_{false};
 
  private:
   /*! \brief set of volatile buf access */

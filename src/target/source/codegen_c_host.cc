@@ -40,19 +40,36 @@ CodeGenCHost::CodeGenCHost() {
 }
 
 void CodeGenCHost::Init(bool output_ssa, bool emit_asserts, bool emit_fwd_func_decl,
-                        std::string target_str, const std::unordered_set<std::string>& devices) {
+                        std::string target_str, const std::unordered_set<std::string>& devices,
+                        bool standalone_mode) {
   emit_asserts_ = emit_asserts;
   emit_fwd_func_decl_ = emit_fwd_func_decl;
+  standalone_mode_ = standalone_mode;
   declared_globals_.clear();
   decl_stream << "// tvm target: " << target_str << "\n";
-  decl_stream << "#define TVM_EXPORTS\n";
-  decl_stream << "#include \"tvm/runtime/base.h\"\n";
-  decl_stream << "#include \"tvm/runtime/c_backend_api.h\"\n";
-  decl_stream << "#include \"tvm/ffi/c_api.h\"\n";
-  decl_stream << "#include <math.h>\n";
-  decl_stream << "#include <stdbool.h>\n";
-  CodeGenCHost::InitGlobalContext();
+
+  if (standalone_mode_) {
+    // Standalone mode: only standard C headers + DLPack
+    decl_stream << "#include <stdlib.h>\n";
+    decl_stream << "#include <string.h>\n";
+    decl_stream << "#include <math.h>\n";
+    decl_stream << "#include <stdbool.h>\n";
+    decl_stream << "#include <stdint.h>\n";
+    decl_stream << "#include \"dlpack.h\"\n";
+    decl_stream << "#include \"c_api.h\"\n";
+  } else {
+    // TVM runtime mode: include TVM headers
+    decl_stream << "#define TVM_EXPORTS\n";
+    decl_stream << "#include \"tvm/runtime/base.h\"\n";
+    decl_stream << "#include \"tvm/runtime/c_backend_api.h\"\n";
+    decl_stream << "#include \"tvm/ffi/c_api.h\"\n";
+    decl_stream << "#include <math.h>\n";
+    decl_stream << "#include <stdbool.h>\n";
+    CodeGenCHost::InitGlobalContext();
+  }
+
   CodeGenC::Init(output_ssa);
+  CodeGenC::standalone_mode_ = standalone_mode_;
 }
 
 void CodeGenCHost::InitGlobalContext() {
@@ -74,7 +91,9 @@ void CodeGenCHost::AddFunction(const GlobalVar& gvar, const PrimFunc& func,
 
   emit_fwd_func_decl_ = emit_fwd_func_decl;
   CodeGenC::AddFunction(gvar, func);
-  if (func->HasNonzeroAttr(tir::attr::kIsEntryFunc) && !has_tvm_ffi_main_func_) {
+
+  // In standalone mode, skip generating TVM FFI wrappers
+  if (!standalone_mode_ && func->HasNonzeroAttr(tir::attr::kIsEntryFunc) && !has_tvm_ffi_main_func_) {
     ICHECK(global_symbol.has_value())
         << "CodeGenCHost: The entry func must have the global_symbol attribute, "
         << "but function " << gvar << " only has attributes " << func->attrs;
@@ -114,10 +133,16 @@ void CodeGenCHost::GenerateForwardFunctionDeclarations(ffi::String global_symbol
 }
 
 void CodeGenCHost::PrintFuncPrefix(std::ostream& os) {  // NOLINT(*)
-  os << "#ifdef __cplusplus\n"
-     << "extern \"C\"\n"
-     << "#endif\n"
-     << "TVM_DLL ";
+  if (standalone_mode_) {
+    // Standalone mode: simple function signature
+    os << "";
+  } else {
+    // TVM runtime mode: use TVM_DLL export
+    os << "#ifdef __cplusplus\n"
+       << "extern \"C\"\n"
+       << "#endif\n"
+       << "TVM_DLL ";
+  }
 }
 
 void CodeGenCHost::PrintType(DataType t, std::ostream& os) {  // NOLINT(*)
@@ -357,10 +382,37 @@ inline void CodeGenCHost::PrintTernaryCondExpr(const T* op, const char* compare,
      << "? (" << a_id << ") : (" << b_id << "))";
 }
 
+void CodeGenCHost::PrintCallExtern(Type ret_type, ffi::String global_symbol,
+                                    const ffi::Array<PrimExpr>& args, bool skip_first_arg,
+                                    std::ostream& os) {  // NOLINT(*)
+  if (standalone_mode_) {
+    // In standalone mode, replace TVM runtime calls with standard C equivalents
+    if (global_symbol == "TVMBackendAllocWorkspace") {
+      // TVMBackendAllocWorkspace(device_type, device_id, nbytes, dtype_code, dtype_bits)
+      // -> malloc(nbytes)
+      ICHECK_GE(args.size(), 3) << "TVMBackendAllocWorkspace requires at least 3 arguments";
+      os << "malloc(";
+      this->PrintExpr(args[2], os);  // nbytes is the 3rd argument (index 2)
+      os << ")";
+      return;
+    } else if (global_symbol == "TVMBackendFreeWorkspace") {
+      // TVMBackendFreeWorkspace(device_type, device_id, ptr) -> (free(ptr), 0)
+      ICHECK_GE(args.size(), 3) << "TVMBackendFreeWorkspace requires at least 3 arguments";
+      os << "(free(";
+      this->PrintExpr(args[2], os);  // ptr is the 3rd argument (index 2)
+      os << "), 0)";
+      return;
+    }
+  }
+  // Default behavior: call the base class implementation
+  CodeGenC::PrintCallExtern(ret_type, global_symbol, args, skip_first_arg, os);
+}
+
 ffi::Module BuildCHost(IRModule mod, Target target) {
   bool output_ssa = false;
   bool emit_asserts = false;
   bool emit_fwd_func_decl = true;
+  bool standalone_mode = target->GetAttr<Integer>("standalone").value_or(0) != 0;
 
   std::unordered_set<std::string> devices;
   if (mod->GetAttr<ffi::Map<GlobalVar, ffi::String>>("device_contexts") != nullptr) {
@@ -372,7 +424,7 @@ ffi::Module BuildCHost(IRModule mod, Target target) {
   }
 
   CodeGenCHost cg;
-  cg.Init(output_ssa, emit_asserts, emit_fwd_func_decl, target->str(), devices);
+  cg.Init(output_ssa, emit_asserts, emit_fwd_func_decl, target->str(), devices, standalone_mode);
   cg.SetConstantsByteAlignment(target->GetAttr<Integer>("constants-byte-alignment").value_or(16));
 
   auto is_aot_executor_fn = [](const PrimFunc& func) -> bool {

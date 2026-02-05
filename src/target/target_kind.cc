@@ -320,6 +320,7 @@ TVM_REGISTER_TARGET_KIND("c", kDLCPU)
     .add_attr_option<ffi::String>("march")
     .add_attr_option<int64_t>("workspace-byte-alignment")
     .add_attr_option<int64_t>("constants-byte-alignment")
+    .add_attr_option<int64_t>("standalone")
     .set_default_keys({"cpu"})
     .set_target_parser(tvm::target::parsers::cpu::ParseTarget);
 
