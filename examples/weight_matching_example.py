@@ -90,7 +90,7 @@ def main():
     print("=" * 70)
 
     # Parse model
-    model_path = "sense_onnx/model_main_17.onnx"
+    model_path = "../sense_onnx/model_main_17.onnx"
     print(f"\nParsing {model_path}...")
     ir_mod, input_info, output_info, weights = parse_model(model_path)
 

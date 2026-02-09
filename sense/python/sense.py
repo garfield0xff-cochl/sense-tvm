@@ -43,7 +43,6 @@ class SenseConfig:
                 "generate_entry": True,
                 "embed_weights": True,
                 "pool_size_mb": 300,
-                "use_auto_codegen": False,  # Use automated weight mapping
             },
             "export": {
                 "save_ir": True,
@@ -240,7 +239,7 @@ class Sense:
         print(f"  Elapsed time: {time.perf_counter() - t_start:.2f}s")
         return self
 
-    def generate_standalone_c(self, name: str = "sense_model", use_auto: bool = None):
+    def generate_standalone_c(self, name: str = "sense_model"):
         """Generate standalone C code using code generator.
 
         This method generates a complete standalone C implementation by parsing
@@ -250,10 +249,9 @@ class Sense:
         ----------
         name : str
             Model name for generated C file.
-        use_auto : bool, optional
-            Use automated weight mapping with PyExprVisitor.
-            If None, uses config setting.
         """
+        from .codegen import generate_standalone_c
+
         t_start = time.perf_counter()
         print(f"\n[5.5/6] Generating standalone C code...")
 
@@ -268,34 +266,14 @@ class Sense:
         output_name = list(self.output_info.keys())[0]
         output_shape = self.output_info[output_name]["shape"]
 
-        # Check if auto codegen should be used
-        standalone_cfg = self.config.get("standalone")
-        if use_auto is None:
-            use_auto = standalone_cfg.get("use_auto_codegen", False)
-
-        if use_auto:
-            # Use fully automated weight mapping
-            from .codegen_auto import generate_standalone_c_auto
-            success = generate_standalone_c_auto(
-                ir_mod=self.ir_mod,
-                weights=self.weights,
-                weights_dir=weights_dir,
-                output_path=output_path,
-                model_name=name,
-                input_shape=input_shape,
-                output_shape=output_shape
-            )
-        else:
-            # Use manual weight mapping
-            from .codegen import generate_standalone_c
-            success = generate_standalone_c(
-                ir_path=ir_path,
-                weights_dir=weights_dir,
-                output_path=output_path,
-                model_name=name,
-                input_shape=input_shape,
-                output_shape=output_shape
-            )
+        success = generate_standalone_c(
+            ir_path=ir_path,
+            weights_dir=weights_dir,
+            output_path=output_path,
+            model_name=name,
+            input_shape=input_shape,
+            output_shape=output_shape
+        )
 
         if success:
             print(f"  Standalone C: {output_path}")
