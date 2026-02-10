@@ -199,8 +199,34 @@ class UnifiedExtractor(PyExprVisitor):
         return lifetimes
 
 
-def extract_all(ir_mod) -> Tuple[List[IROperation], List[ConstantInfo], List[BufferLifetime], Dict]:
+def extract_tir_functions(ir_mod) -> Dict[str, any]:
+    """Extract TIR function bodies for inlining.
+
+    Returns
+    -------
+    tir_functions : Dict[str, PrimFunc]
+        TIR function name to PrimFunc mapping.
+    """
+    from tvm.tir import PrimFunc
+
+    tir_funcs = {}
+    for gvar, func in ir_mod.functions.items():
+        if isinstance(func, PrimFunc):
+            func_name = gvar.name_hint
+            tir_funcs[func_name] = func
+
+    return tir_funcs
+
+
+def extract_all(ir_mod, extract_tir: bool = False) -> Tuple[List[IROperation], List[ConstantInfo], List[BufferLifetime], Dict, Optional[Dict]]:
     """Extract everything from IR in one pass.
+
+    Parameters
+    ----------
+    ir_mod : tvm.IRModule
+        Relax IR module.
+    extract_tir : bool
+        If True, also extract TIR function bodies for inlining.
 
     Returns
     -------
@@ -212,13 +238,20 @@ def extract_all(ir_mod) -> Tuple[List[IROperation], List[ConstantInfo], List[Buf
         494 buffers with lifetimes.
     var_shapes : Dict
         Variable name to shape mapping.
+    tir_functions : Optional[Dict]
+        TIR function bodies (if extract_tir=True).
     """
     extractor = UnifiedExtractor()
     extractor.visit_expr(ir_mod["main"])
+
+    tir_funcs = None
+    if extract_tir:
+        tir_funcs = extract_tir_functions(ir_mod)
 
     return (
         extractor.operations,
         extractor.constants,
         extractor.get_buffer_lifetimes(),
-        extractor.var_shapes
+        extractor.var_shapes,
+        tir_funcs
     )

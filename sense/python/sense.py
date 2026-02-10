@@ -24,10 +24,14 @@ class SenseConfig:
         # Default configuration
         self.defaults = {
             "common": {
-                "output_dir": "./build/sense_output",
+                "output_dir": "./bin",
                 "log_level": "INFO",
                 "target": "c",
                 "opt_level": 3,
+                # MCU Strategy
+                "enable_static_storage": True,      # Phase 1: Static buffer with liveness
+                "enable_unified_weights": True,     # Phase 1: Single weight binary
+                "target_memory_mb": 50,             # Target memory (achieved: 44 MB)
             },
             "parser": {
                 "input_name": None,
@@ -36,20 +40,11 @@ class SenseConfig:
             },
             "optimizer": {
                 "apply_default_pipeline": True,
+                "legalize_ops": True,
                 "fuse_ops": True,
+                "fuse_tir": True,
                 "fold_constant": True,
-            },
-            "standalone": {
-                "generate_entry": True,
-                "embed_weights": True,
-                "pool_size_mb": 300,
-            },
-            "mcu_strategy": {
-                "enable": False,              # Enable TVM MCU optimizations
-                "static_storage": False,      # Static buffer planning with liveness
-                "aggressive_inline": False,   # Inline all operations (future)
-                "minimal_ffi": False,         # Reduce FFI calls (future)
-                "target_memory_mb": 50,       # Target memory footprint
+                "enable_inline": False,             # Phase 3: Inline simple ops
             },
             "export": {
                 "save_ir": True,
@@ -156,10 +151,11 @@ class Sense:
     def optimize(self):
         """Apply Relax-level optimizations.
 
-        This phase applies the default Relax optimization pipeline including:
+        This phase applies Relax optimization pipeline including:
+        - LegalizeOps: Legalize operators for target
         - FuseOps: Operator fusion
+        - FuseTIR: TIR function fusion
         - FoldConstant: Constant folding
-        - DecomposeOps: Operator decomposition
         """
         t_start = time.perf_counter()
         print(f"\n[2/6] Optimizing...")
@@ -173,10 +169,21 @@ class Sense:
         else:
             # Apply custom passes
             passes = []
-            if opt_cfg["fold_constant"]:
-                passes.append(relax.transform.FoldConstant())
+            if opt_cfg.get("legalize_ops", True):
+                passes.append(relax.transform.LegalizeOps())
             if opt_cfg["fuse_ops"]:
                 passes.append(relax.transform.FuseOps())
+
+            # Add custom InlineOps pass if enabled
+            if opt_cfg.get("enable_inline", False):
+                from .inline_pass import InlineOps
+                passes.append(InlineOps())
+                print(f"  InlineOps pass added to pipeline")
+
+            if opt_cfg.get("fuse_tir", True):
+                passes.append(relax.transform.FuseTIR())
+            if opt_cfg["fold_constant"]:
+                passes.append(relax.transform.FoldConstant())
 
             with tvm.transform.PassContext(opt_level=self.config.get("common")["opt_level"]):
                 self.ir_mod = tvm.transform.Sequential(passes)(self.ir_mod)
@@ -316,7 +323,14 @@ class Sense:
         output_name = list(self.output_info.keys())[0]
         output_shape = self.output_info[output_name]["shape"]
 
-        # Generate with static storage
+        # Check if inline is enabled (from optimizer config)
+        opt_cfg = self.config.get("optimizer")
+        enable_inline = opt_cfg.get("enable_inline", False)
+
+        if enable_inline:
+            print(f"  Phase 3: Aggressive Inlining enabled")
+
+        # Generate with static storage (and optional inlining)
         success = generate_static_standalone_c(
             ir_mod=self.ir_mod,
             weights=self.weights,
@@ -324,7 +338,8 @@ class Sense:
             output_path=output_path,
             model_name=name,
             input_shape=input_shape,
-            output_shape=output_shape
+            output_shape=output_shape,
+            enable_inline=enable_inline
         )
 
         if success:
@@ -652,8 +667,6 @@ int main(int argc, char* argv[]) {{
         (self
             .parse(model_path)
             .optimize()
-            .transform_to_standalone()
-            .apply_mcu_strategy()
             .build_standalone(target=target)
             .export(name=name)
             .generate_standalone_c(name=name)

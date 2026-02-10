@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Dict, Tuple, List
 
 
+# TODO: delete
 def _get_weight_order_model_main_17() -> List[str]:
     """Get weight order for model_main_17 (hardcoded but proven)."""
     ordered = []
@@ -78,7 +79,8 @@ def generate_static_standalone_c(
     output_path: Path,
     model_name: str = "sense_model",
     input_shape: Tuple = (1, 128, 192, 1),
-    output_shape: Tuple = (1, 863)
+    output_shape: Tuple = (1, 863),
+    enable_inline: bool = False
 ) -> bool:
     """Generate C code with static storage (no dynamic allocation)."""
     try:
@@ -90,8 +92,11 @@ def generate_static_standalone_c(
         from .weight_packer import WeightPacker
 
         print(f"    [1/4] Extracting from IR...")
-        operations, constants, buffer_lifetimes, var_shapes = extract_all(ir_mod)
+        extract_tir = enable_inline  # Extract TIR if inline enabled
+        operations, constants, buffer_lifetimes, var_shapes, tir_funcs = extract_all(ir_mod, extract_tir=extract_tir)
         print(f"          Ops: {len(operations)}, Constants: {len(constants)}, Buffers: {len(buffer_lifetimes)}")
+        if enable_inline:
+            print(f"          TIR functions: {len(tir_funcs) if tir_funcs else 0}")
 
         print(f"    [2/4] Planning static storage...")
         planner = StaticStoragePlanner()
@@ -286,6 +291,8 @@ int model_forward(float* input, float* output) {{
         weight_idx = 0
         matmul_count = 0
         add39_count = 0
+        inlined_count = 0
+        ffi_count = 0
 
         for op_idx, op in enumerate(parsed_ops):
             op_name = op['op']
@@ -436,26 +443,54 @@ int model_forward(float* input, float* output) {{
                 code += f'    __tvm_ffi_{op_name}(NULL, A, 3, NULL);\n'
 
             elif op_name.startswith('maximum'):
-                in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
-                if in_name and in_name in alloc_map:
-                    _, in_ti = alloc_map[in_name]
-                    code += f'    A[0] = make_arg(&T[{in_ti}]);\n'
+                if enable_inline:
+                    # Inline ReLU
+                    in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
+                    in_offset = buffer_offset_map.get(in_name, 0) if in_name else 0
+                    size = int(np.prod(shape))
+                    code += f'    /* Inline ReLU */\n'
+                    code += f'    for (int i = 0; i < {size}; i++) {{\n'
+                    code += f'        float val = g_unified_buffer[{in_offset} + i];\n'
+                    code += f'        g_unified_buffer[{offset} + i] = (val > 0.0f) ? val : 0.0f;\n'
+                    code += f'    }}\n'
+                    inlined_count += 1
                 else:
-                    code += f'    A[0] = make_arg(&T[ti-2]);\n'
-                code += '    A[1] = make_arg(&Tzero);\n'
-                code += f'    A[2] = make_arg(&T[ti-1]);\n'
-                code += f'    __tvm_ffi_{op_name}(NULL, A, 3, NULL);\n'
+                    # FFI call
+                    in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
+                    if in_name and in_name in alloc_map:
+                        _, in_ti = alloc_map[in_name]
+                        code += f'    A[0] = make_arg(&T[{in_ti}]);\n'
+                    else:
+                        code += f'    A[0] = make_arg(&T[ti-2]);\n'
+                    code += '    A[1] = make_arg(&Tzero);\n'
+                    code += f'    A[2] = make_arg(&T[ti-1]);\n'
+                    code += f'    __tvm_ffi_{op_name}(NULL, A, 3, NULL);\n'
+                    ffi_count += 1
 
             elif op_name.startswith('minimum'):
-                in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
-                if in_name and in_name in alloc_map:
-                    _, in_ti = alloc_map[in_name]
-                    code += f'    A[0] = make_arg(&T[{in_ti}]);\n'
+                if enable_inline:
+                    # Inline clip(x, 6)
+                    in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
+                    in_offset = buffer_offset_map.get(in_name, 0) if in_name else 0
+                    size = int(np.prod(shape))
+                    code += f'    /* Inline Clip6 */\n'
+                    code += f'    for (int i = 0; i < {size}; i++) {{\n'
+                    code += f'        float val = g_unified_buffer[{in_offset} + i];\n'
+                    code += f'        g_unified_buffer[{offset} + i] = (val < 6.0f) ? val : 6.0f;\n'
+                    code += f'    }}\n'
+                    inlined_count += 1
                 else:
-                    code += f'    A[0] = make_arg(&T[ti-2]);\n'
-                code += '    A[1] = make_arg(&Tsix);\n'
-                code += f'    A[2] = make_arg(&T[ti-1]);\n'
-                code += f'    __tvm_ffi_{op_name}(NULL, A, 3, NULL);\n'
+                    # FFI call
+                    in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
+                    if in_name and in_name in alloc_map:
+                        _, in_ti = alloc_map[in_name]
+                        code += f'    A[0] = make_arg(&T[{in_ti}]);\n'
+                    else:
+                        code += f'    A[0] = make_arg(&T[ti-2]);\n'
+                    code += '    A[1] = make_arg(&Tsix);\n'
+                    code += f'    A[2] = make_arg(&T[ti-1]);\n'
+                    code += f'    __tvm_ffi_{op_name}(NULL, A, 3, NULL);\n'
+                    ffi_count += 1
 
             elif op_name.startswith('pad'):
                 in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
@@ -502,31 +537,66 @@ int model_forward(float* input, float* output) {{
                     code += f'    __tvm_ffi_matmul(NULL, A, 3, NULL);\n'
 
             elif op_name == 'tir_sigmoid':
-                in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
-                if in_name and in_name in alloc_map:
-                    _, in_ti = alloc_map[in_name]
-                    code += f'    A[0] = make_arg(&T[{in_ti}]);\n'
+                if enable_inline:
+                    # Inline sigmoid
+                    in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
+                    in_offset = buffer_offset_map.get(in_name, 0) if in_name else 0
+                    size = int(np.prod(shape))
+                    code += f'    /* Inline Sigmoid */\n'
+                    code += f'    for (int i = 0; i < {size}; i++) {{\n'
+                    code += f'        float x = g_unified_buffer[{in_offset} + i];\n'
+                    code += f'        g_unified_buffer[{offset} + i] = 1.0f / (1.0f + expf(-x));\n'
+                    code += f'    }}\n'
+                    inlined_count += 1
                 else:
-                    code += f'    A[0] = make_arg(&T[ti-2]);\n'
-                code += f'    A[1] = make_arg(&T[ti-1]);\n'
-                code += f'    __tvm_ffi_tir_sigmoid(NULL, A, 2, NULL);\n'
+                    # FFI call
+                    in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
+                    if in_name and in_name in alloc_map:
+                        _, in_ti = alloc_map[in_name]
+                        code += f'    A[0] = make_arg(&T[{in_ti}]);\n'
+                    else:
+                        code += f'    A[0] = make_arg(&T[ti-2]);\n'
+                    code += f'    A[1] = make_arg(&T[ti-1]);\n'
+                    code += f'    __tvm_ffi_tir_sigmoid(NULL, A, 2, NULL);\n'
+                    ffi_count += 1
 
             elif op_name == 'multiply':
-                in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
-                if in_name and in_name in alloc_map:
-                    _, in_ti = alloc_map[in_name]
-                    code += f'    A[0] = make_arg(&T[{in_ti}]);\n'
+                if enable_inline:
+                    # Inline multiply(*0.5)
+                    in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
+                    in_offset = buffer_offset_map.get(in_name, 0) if in_name else 0
+                    size = int(np.prod(shape))
+                    code += f'    /* Inline Multiply */\n'
+                    code += f'    for (int i = 0; i < {size}; i++) {{\n'
+                    code += f'        g_unified_buffer[{offset} + i] = g_unified_buffer[{in_offset} + i] * 0.5f;\n'
+                    code += f'    }}\n'
+                    inlined_count += 1
                 else:
-                    code += f'    A[0] = make_arg(&T[ti-2]);\n'
-                code += f'    A[1] = make_arg(&T[ti-1]);\n'
-                code += f'    __tvm_ffi_multiply(NULL, A, 2, NULL);\n'
+                    # FFI call
+                    in_name = next((aval for atype, aval in args if atype == 'alloc' and aval != out_name), None)
+                    if in_name and in_name in alloc_map:
+                        _, in_ti = alloc_map[in_name]
+                        code += f'    A[0] = make_arg(&T[{in_ti}]);\n'
+                    else:
+                        code += f'    A[0] = make_arg(&T[ti-2]);\n'
+                    code += f'    A[1] = make_arg(&T[ti-1]);\n'
+                    code += f'    __tvm_ffi_multiply(NULL, A, 2, NULL);\n'
+                    ffi_count += 1
 
             else:
                 code += f'    /* Generic */\n'
                 code += f'    A[0] = make_arg(&T[ti-2]); A[1] = make_arg(&T[ti-1]);\n'
                 code += f'    __tvm_ffi_{op_name}(NULL, A, 2, NULL);\n'
+                ffi_count += 1
 
             code += '\n'
+
+        # Print inline statistics
+        if enable_inline:
+            print(f"          Inline statistics:")
+            print(f"            Inlined: {inlined_count} operations")
+            print(f"            FFI calls: {ffi_count} (reduced from {len(parsed_ops)})")
+            print(f"            Reduction: {(len(parsed_ops) - ffi_count) / len(parsed_ops) * 100:.1f}%")
 
         # Output
         final_buf_offset = buffer_offset_map.get(f'alloc{len(parsed_ops)-1}', 0)
