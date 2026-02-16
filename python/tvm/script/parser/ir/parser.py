@@ -52,7 +52,7 @@ def _visit_class_def(self: Parser, node: doc.ClassDef) -> None:
             fake_module = ModuleWithGlobalVars()
             self.var_table.add(node.name, fake_module)
 
-            # Step 1: Check if this class inherits from BasePyModule
+            # wetep 1: Check if this class inherits from BasePyModule
             is_base_py_module = _check_base_py_module_inheritance(node)
             if is_base_py_module:
                 # Store this information in the IRModule for later use

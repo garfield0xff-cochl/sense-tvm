@@ -84,21 +84,21 @@ def default_build_pipeline():
     def _pipeline(mod: tvm.ir.IRModule, _ctx: tvm.transform.PassContext) -> tvm.ir.IRModule:
         seq = tvm.transform.Sequential(
             [
-                backend.DispatchSampling(),
-                backend.DispatchSortScan(),
-                transform.LegalizeOps(),
-                transform.RewriteDataflowReshape(),
-                transform.ToNonDataflow(),
-                transform.RemovePurityChecking(),
-                transform.CallTIRRewrite(),
-                transform.StaticPlanBlockMemory(),
-                transform.RewriteCUDAGraph(),
-                transform.LowerAllocTensor(),
-                transform.KillAfterLastUse(),
-                transform.LowerRuntimeBuiltin(),
-                transform.ComputePrimValue(),
-                transform.VMShapeLower(),
-                transform.AttachGlobalSymbol(),
+                backend.DispatchSampling(),              # Dispatch sampling ops to target-specific implementations
+                backend.DispatchSortScan(),              # Dispatch sort/scan ops to target-specific implementations
+                transform.LegalizeOps(),                 # Lower high-level Relax ops to executable lower-level ops
+                transform.RewriteDataflowReshape(),      # Rewrite reshape ops in dataflow blocks for optimization
+                transform.ToNonDataflow(),               # Convert dataflow blocks to normal bindings (simplify control flow)
+                transform.RemovePurityChecking(),        # Remove purity checking annotations (not needed at runtime)
+                transform.CallTIRRewrite(),              # Rewrite call_tir ops into VM-executable form
+                transform.StaticPlanBlockMemory(),       # Plan static memory allocation at compile time
+                transform.RewriteCUDAGraph(),            # Rewrite code for CUDA graph optimization
+                transform.LowerAllocTensor(),            # Lower alloc_tensor ops to VM memory allocation instructions
+                transform.KillAfterLastUse(),            # Insert memory deallocation after last use (memory optimization)
+                transform.LowerRuntimeBuiltin(),         # Lower to VM runtime builtin function calls
+                transform.ComputePrimValue(),            # Compute PrimValue type calculations to concrete values
+                transform.VMShapeLower(),                # Lower dynamic shape computations to VM-executable form
+                transform.AttachGlobalSymbol(),          # Attach global symbol attributes (enable runtime function lookup)
             ],
         )
         mod = seq(mod)

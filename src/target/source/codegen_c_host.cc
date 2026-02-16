@@ -55,7 +55,6 @@ void CodeGenCHost::Init(bool output_ssa, bool emit_asserts, bool emit_fwd_func_d
     decl_stream << "#include <math.h>\n";
     decl_stream << "#include <stdbool.h>\n";
     decl_stream << "#include <stdint.h>\n";
-    decl_stream << "#include \"dlpack.h\"\n";
     decl_stream << "#include \"c_api.h\"\n";
   } else {
     // TVM runtime mode: include TVM headers
