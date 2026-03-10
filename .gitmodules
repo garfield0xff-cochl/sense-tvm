@@ -13,3 +13,10 @@
 [submodule "3rdparty/tvm-ffi"]
 	path = 3rdparty/tvm-ffi
 	url = https://github.com/apache/tvm-ffi
+[submodule "3rdparty/XNNPACK"]
+	path = 3rdparty/XNNPACK
+	url = https://github.com/google/XNNPACK
+[submodule "3rdparty/ncnn"]
+	path = 3rdparty/ncnn
+	url = https://github.com/Tencent/ncnn
+
