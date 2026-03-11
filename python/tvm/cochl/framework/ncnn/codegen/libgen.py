@@ -6,7 +6,7 @@ import tvm
 from tvm import tir
 
 from tvm.cochl.framework.ncnn.codegen.ncnn_path import NEON_SOURCES
-from tvm.cochl.framework.ncnn.codegen.match import call_extern_symbol
+from tvm.cochl.framework.ncnn.kernel.op_packer import resolve_call_extern
 
 
 def build_call_extern_module(entries: list[dict]) -> tvm.IRModule:
@@ -32,7 +32,7 @@ def build_call_extern_module(entries: list[dict]) -> tvm.IRModule:
 
     stmts = []
     for entry in entries:
-        symbol_info = call_extern_symbol(entry)
+        symbol_info = resolve_call_extern(entry)
         if symbol_info is None:
             continue
         symbol, kind = symbol_info

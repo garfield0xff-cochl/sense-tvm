@@ -8,11 +8,13 @@ from typing import Dict, Iterable, List, Tuple
 
 import tvm
 from tvm.cochl.framework.relax.standalone_packer import match_relax_const_idx
-from tvm.cochl.framework.ncnn.kernel.op_packer import infer_ncnn_function_name
+from tvm.cochl.framework.ncnn.kernel.op_packer import (
+    entry_to_pattern_entry,
+    infer_ncnn_function_name,
+    resolve_call_extern,
+    resolve_symbol_name,
+)
 from . import sources
-
-from tvm.cochl.framework.ncnn.codegen.helpers import as_pattern_entry
-from tvm.cochl.framework.ncnn.codegen.match import call_extern_symbol
 
 
 def _normalize_func(name: str) -> str:
@@ -161,7 +163,7 @@ def _align_ops(ncnn_entries: List[dict], plan) -> Tuple[List[Tuple[dict, object]
                 aligned.append((entry, plan_ops[i]))
                 i += 1
             else:
-                ncnn_name = infer_ncnn_function_name(as_pattern_entry(entry))
+                ncnn_name = infer_ncnn_function_name(entry_to_pattern_entry(entry))
                 skipped.append(f"{entry.get('tvm_op')}:{ncnn_name}")
             continue
         while i < len(plan_ops):
@@ -171,7 +173,7 @@ def _align_ops(ncnn_entries: List[dict], plan) -> Tuple[List[Tuple[dict, object]
                 break
             i += 1
         else:
-            ncnn_name = infer_ncnn_function_name(as_pattern_entry(entry))
+            ncnn_name = infer_ncnn_function_name(entry_to_pattern_entry(entry))
             skipped.append(f"{entry.get('tvm_op')}:{ncnn_name}")
     return aligned, skipped
 
@@ -454,7 +456,7 @@ def emit_main_entry_from_plan(
         out_elems = _elems_from_shape(out_shape) if out_shape else 0
 
         if entry is not None:
-            ncnn_name = infer_ncnn_function_name(as_pattern_entry(entry))
+            ncnn_name = infer_ncnn_function_name(entry_to_pattern_entry(entry))
             if entry.get("tvm_op") == "relax.multiply" and len(op.input_vars) == 1:
                 scalar = 1.0
                 scalar_map = getattr(plan, "scalar_values", {})
@@ -478,7 +480,7 @@ def emit_main_entry_from_plan(
                 pack_state[op.output_var] = 1
                 continue
 
-            symbol_info = call_extern_symbol(entry)
+            symbol_info = resolve_call_extern(entry)
             if symbol_info is None:
                 continue
             symbol, kind = symbol_info
@@ -946,11 +948,11 @@ def emit_main_entry(
     proto_lines = []
     op_lines = []
     for entry in pattern_entries:
-        symbol_info = call_extern_symbol(entry)
+        symbol_info = resolve_call_extern(entry)
         if symbol_info is None:
             continue
         symbol, kind = symbol_info
-        ncnn_name = infer_ncnn_function_name(as_pattern_entry(entry))
+        ncnn_name = infer_ncnn_function_name(entry_to_pattern_entry(entry))
         op_label = f"{entry['tvm_op']}:{ncnn_name}"
         op_lines.append((symbol, kind, op_label))
         if kind == "conv":
@@ -1056,8 +1058,6 @@ def _codegen_impl(
     from tvm.cochl.framework.ncnn.kernel.op_packer import build_pattern_entries
     from tvm.cochl.framework.ncnn.kernel.weight_packer import NcnnWeightPacker
     from tvm.cochl.framework.ncnn.codegen.ncnn_path import NCNN_HEADER, NCNN_TO_STANDALONE
-    from tvm.cochl.framework.ncnn.codegen.helpers import as_pattern_entry
-    from tvm.cochl.framework.ncnn.codegen.match import symbol_for_entry
     from tvm.cochl.framework.ncnn.codegen.libgen import build_call_extern_module, collect_neon_sources, write_lib0_with_impl
     from tvm.cochl.framework.ncnn.codegen.memory_plan import build_plan
     import hashlib
@@ -1093,7 +1093,7 @@ def _codegen_impl(
 
     matched_symbols: set[str] = set()
     for idx, entry in enumerate(pattern_entries):
-        symbol = symbol_for_entry(entry)
+        symbol = resolve_symbol_name(entry)
         if symbol is None:
             continue
         else:
@@ -1164,7 +1164,7 @@ def _codegen_impl(
     for entry, op in aligned:
         if entry.get("tvm_op") != "relax.nn.conv2d":
             continue
-        ncnn_name = infer_ncnn_function_name(as_pattern_entry(entry))
+        ncnn_name = infer_ncnn_function_name(entry_to_pattern_entry(entry))
         if len(op.input_vars) < 2:
             continue
         k_h = int(entry["attrs"].get("kernel_h", 0))
