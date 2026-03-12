@@ -39,6 +39,7 @@ mkdir -p "$BUILD_DIR"
 cp "$ROOT_DIR/cmake/config.cmake" "$CONFIG_FILE"
 
 LLVM_CONFIG="${LLVM_CONFIG:-}"
+ORIG_DYLD_LIBRARY_PATH="${DYLD_LIBRARY_PATH:-}"
 
 if [ -z "$LLVM_CONFIG" ]; then
   for candidate in llvm-config-17 llvm-config-18; do
@@ -66,6 +67,9 @@ fi
 
 section "Using LLVM"
 info "LLVM_CONFIG=$LLVM_CONFIG"
+if [ -n "$ORIG_DYLD_LIBRARY_PATH" ]; then
+  info "Ignoring inherited DYLD_LIBRARY_PATH during build/install steps"
+fi
 
 {
   printf 'set(CMAKE_BUILD_TYPE %s)\n' "$BUILD_TYPE"
@@ -83,45 +87,48 @@ section "Configuring TVM"
 info "config.cmake=$CONFIG_FILE"
 if [ -n "$GENERATOR_ARGS" ]; then
   info "generator=Ninja"
-  CC="$CC" CXX="$CXX" cmake -S "$ROOT_DIR" -B "$BUILD_DIR" -G Ninja
+  env -u DYLD_LIBRARY_PATH CC="$CC" CXX="$CXX" cmake -S "$ROOT_DIR" -B "$BUILD_DIR" -G Ninja
 else
   info "generator=default"
-  CC="$CC" CXX="$CXX" cmake -S "$ROOT_DIR" -B "$BUILD_DIR"
+  env -u DYLD_LIBRARY_PATH CC="$CC" CXX="$CXX" cmake -S "$ROOT_DIR" -B "$BUILD_DIR"
 fi
 
 section "Building TVM"
 if [ -n "$JOBS" ]; then
   info "parallel jobs=$JOBS"
-  cmake --build "$BUILD_DIR" --parallel "$JOBS"
+  env -u DYLD_LIBRARY_PATH cmake --build "$BUILD_DIR" --parallel "$JOBS"
 else
   info "parallel jobs=auto"
-  cmake --build "$BUILD_DIR" --parallel
+  env -u DYLD_LIBRARY_PATH cmake --build "$BUILD_DIR" --parallel
 fi
 
 section "Exporting runtime environment"
 export TVM_HOME="$ROOT_DIR"
 export TVM_LIBRARY_PATH="$BUILD_DIR"
 export PYTHONPATH="$ROOT_DIR/python"
-
+export DYLD_LIBRARY_PATH="$BUILD_DIR${ORIG_DYLD_LIBRARY_PATH:+:$ORIG_DYLD_LIBRARY_PATH}"
+ 
 info "TVM_HOME=$TVM_HOME"
 info "TVM_LIBRARY_PATH=$TVM_LIBRARY_PATH"
 info "PYTHONPATH=$PYTHONPATH"
+info "DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH"
 
 section "Reinstalling editable python packages"
-(cd "$ROOT_DIR/3rdparty/tvm-ffi" && python --version && CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install --no-cache-dir --force-reinstall -e .)
-(cd "$ROOT_DIR" && python --version && CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install --no-cache-dir --force-reinstall -e .)
+(cd "$ROOT_DIR/3rdparty/tvm-ffi" && env -u DYLD_LIBRARY_PATH python --version && env -u DYLD_LIBRARY_PATH CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install --no-cache-dir --force-reinstall -e .)
+(cd "$ROOT_DIR" && env -u DYLD_LIBRARY_PATH python --version && env -u DYLD_LIBRARY_PATH CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install --no-cache-dir --force-reinstall -e .)
 
 section "Synchronizing version metadata"
-(cd "$ROOT_DIR" && python version.py)
+(cd "$ROOT_DIR" && env -u DYLD_LIBRARY_PATH python version.py)
 
 section "Install Sense Required Dependencies"
-(cd "$ROOT_DIR" && python -m pip install numpy psutil cloudpickle xgboost ml_dtypes onnxruntime)
+(cd "$ROOT_DIR" && env -u DYLD_LIBRARY_PATH python -m pip install numpy psutil cloudpickle xgboost ml_dtypes onnx onnxruntime)
 
 section "Completed"
 info "export the runtime environment in your current shell:"
 info "export TVM_HOME=$ROOT_DIR"
 info "export TVM_LIBRARY_PATH=$BUILD_DIR"
 info "export PYTHONPATH=$ROOT_DIR/python"
+info "export DYLD_LIBRARY_PATH=$BUILD_DIR\${DYLD_LIBRARY_PATH:+:\$DYLD_LIBRARY_PATH}"
 
 section "Run Sense"
 info "cd sense"
