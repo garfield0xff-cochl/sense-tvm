@@ -1,0 +1,22 @@
+{
+  "model_path": "onnx/model_main_17.onnx",
+  "hardware": "rpi2",
+  "build_option": {
+    "backend": "ncnn",
+    "opt_level": 3,
+    "target_str": null
+  },
+  "optimizer": {
+    "custom_passes": []
+  },
+  "export": {
+    "output_dir": "./bin",
+    "model_name": "sense_model_main",
+    "save_tir": true,
+    "save_weight_manifest": true
+  },
+  "debug": {
+    "dump_operator_outputs": false,
+    "measure_operator_delay": false
+  }
+}

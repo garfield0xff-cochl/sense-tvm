@@ -180,10 +180,8 @@ cscope*
 # TVM generated code
 perf
 .bash_history
-*.json
 *.params
 *.ro
-*.onnx
 *.h5
 synset.txt
 cat.jpg

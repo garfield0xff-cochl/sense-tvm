@@ -1,0 +1,2339 @@
+{
+  "total_size_bytes": 23040256,
+  "total_size_mb": 21.972900390625,
+  "num_weights": 212,
+  "weights": {
+    "0": {
+      "name": "model_2_model_1_m_main_1_Conv1_Conv2D_weights_fused_bn",
+      "offset": 0,
+      "size_bytes": 2592,
+      "aligned_size": 2624,
+      "shape": [
+        24,
+        3,
+        3,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "1": {
+      "name": "model_2_model_1_m_main_1_Conv1_Conv2D_bias_fused_bn",
+      "offset": 2624,
+      "size_bytes": 96,
+      "aligned_size": 128,
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "2": {
+      "name": "model_2_model_1_m_main_1_expanded_conv_depthwise_depthwise_weights_fused_bn",
+      "offset": 2752,
+      "size_bytes": 864,
+      "aligned_size": 896,
+      "shape": [
+        216
+      ],
+      "dtype": "float32"
+    },
+    "3": {
+      "name": "model_2_model_1_m_main_1_expanded_conv_depthwise_depthwise_bias_fused_bn",
+      "offset": 3648,
+      "size_bytes": 96,
+      "aligned_size": 128,
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "4": {
+      "name": "model_2_model_1_m_main_1_expanded_conv_project_Conv2D_weights_fused_bn",
+      "offset": 3776,
+      "size_bytes": 1536,
+      "aligned_size": 1536,
+      "shape": [
+        16,
+        24,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "5": {
+      "name": "model_2_model_1_m_main_1_expanded_conv_project_Conv2D_bias_fused_bn",
+      "offset": 5312,
+      "size_bytes": 64,
+      "aligned_size": 64,
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "6": {
+      "name": "model_2_model_1_m_main_1_block_1_expand_Conv2D_weights_fused_bn",
+      "offset": 5376,
+      "size_bytes": 6144,
+      "aligned_size": 6144,
+      "shape": [
+        96,
+        16,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "7": {
+      "name": "model_2_model_1_m_main_1_block_1_expand_Conv2D_bias_fused_bn",
+      "offset": 11520,
+      "size_bytes": 384,
+      "aligned_size": 384,
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "8": {
+      "name": "model_2_model_1_m_main_1_block_1_depthwise_depthwise_weights_fused_bn",
+      "offset": 11904,
+      "size_bytes": 3456,
+      "aligned_size": 3456,
+      "shape": [
+        864
+      ],
+      "dtype": "float32"
+    },
+    "9": {
+      "name": "model_2_model_1_m_main_1_block_1_depthwise_depthwise_bias_fused_bn",
+      "offset": 15360,
+      "size_bytes": 384,
+      "aligned_size": 384,
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "10": {
+      "name": "model_2_model_1_m_main_1_block_1_project_Conv2D_weights_fused_bn",
+      "offset": 15744,
+      "size_bytes": 9216,
+      "aligned_size": 9216,
+      "shape": [
+        24,
+        96,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "11": {
+      "name": "model_2_model_1_m_main_1_block_1_project_Conv2D_bias_fused_bn",
+      "offset": 24960,
+      "size_bytes": 96,
+      "aligned_size": 128,
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "12": {
+      "name": "model_2_model_1_m_main_1_block_2_expand_Conv2D_weights_fused_bn",
+      "offset": 25088,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        144,
+        24,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "13": {
+      "name": "model_2_model_1_m_main_1_block_2_expand_Conv2D_bias_fused_bn",
+      "offset": 38912,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "14": {
+      "name": "model_2_model_1_m_main_1_block_2_depthwise_depthwise_weights_fused_bn",
+      "offset": 39488,
+      "size_bytes": 5184,
+      "aligned_size": 5184,
+      "shape": [
+        1296
+      ],
+      "dtype": "float32"
+    },
+    "15": {
+      "name": "model_2_model_1_m_main_1_block_2_depthwise_depthwise_bias_fused_bn",
+      "offset": 44672,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "16": {
+      "name": "model_2_model_1_m_main_1_block_2_project_Conv2D_weights_fused_bn",
+      "offset": 45248,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        24,
+        144,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "17": {
+      "name": "model_2_model_1_m_main_1_block_2_project_Conv2D_bias_fused_bn",
+      "offset": 59072,
+      "size_bytes": 96,
+      "aligned_size": 128,
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "18": {
+      "name": "model_2_model_1_m_main_1_block_3_expand_Conv2D_weights_fused_bn",
+      "offset": 59200,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        144,
+        24,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "19": {
+      "name": "model_2_model_1_m_main_1_block_3_expand_Conv2D_bias_fused_bn",
+      "offset": 73024,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "20": {
+      "name": "model_2_model_1_m_main_1_block_3_depthwise_depthwise_weights_fused_bn",
+      "offset": 73600,
+      "size_bytes": 5184,
+      "aligned_size": 5184,
+      "shape": [
+        1296
+      ],
+      "dtype": "float32"
+    },
+    "21": {
+      "name": "model_2_model_1_m_main_1_block_3_depthwise_depthwise_bias_fused_bn",
+      "offset": 78784,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "22": {
+      "name": "model_2_model_1_m_main_1_block_3_project_Conv2D_weights_fused_bn",
+      "offset": 79360,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        24,
+        144,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "23": {
+      "name": "model_2_model_1_m_main_1_block_3_project_Conv2D_bias_fused_bn",
+      "offset": 93184,
+      "size_bytes": 96,
+      "aligned_size": 128,
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "24": {
+      "name": "model_2_model_1_m_main_1_block_4_expand_Conv2D_weights_fused_bn",
+      "offset": 93312,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        144,
+        24,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "25": {
+      "name": "model_2_model_1_m_main_1_block_4_expand_Conv2D_bias_fused_bn",
+      "offset": 107136,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "26": {
+      "name": "model_2_model_1_m_main_1_block_4_depthwise_depthwise_weights_fused_bn",
+      "offset": 107712,
+      "size_bytes": 5184,
+      "aligned_size": 5184,
+      "shape": [
+        1296
+      ],
+      "dtype": "float32"
+    },
+    "27": {
+      "name": "model_2_model_1_m_main_1_block_4_depthwise_depthwise_bias_fused_bn",
+      "offset": 112896,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "28": {
+      "name": "model_2_model_1_m_main_1_block_4_project_Conv2D_weights_fused_bn",
+      "offset": 113472,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        24,
+        144,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "29": {
+      "name": "model_2_model_1_m_main_1_block_4_project_Conv2D_bias_fused_bn",
+      "offset": 127296,
+      "size_bytes": 96,
+      "aligned_size": 128,
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "30": {
+      "name": "model_2_model_1_m_main_1_block_5_expand_Conv2D_weights_fused_bn",
+      "offset": 127424,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        144,
+        24,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "31": {
+      "name": "model_2_model_1_m_main_1_block_5_expand_Conv2D_bias_fused_bn",
+      "offset": 141248,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "32": {
+      "name": "model_2_model_1_m_main_1_block_5_depthwise_depthwise_weights_fused_bn",
+      "offset": 141824,
+      "size_bytes": 5184,
+      "aligned_size": 5184,
+      "shape": [
+        1296
+      ],
+      "dtype": "float32"
+    },
+    "33": {
+      "name": "model_2_model_1_m_main_1_block_5_depthwise_depthwise_bias_fused_bn",
+      "offset": 147008,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "34": {
+      "name": "model_2_model_1_m_main_1_block_5_project_Conv2D_weights_fused_bn",
+      "offset": 147584,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        24,
+        144,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "35": {
+      "name": "model_2_model_1_m_main_1_block_5_project_Conv2D_bias_fused_bn",
+      "offset": 161408,
+      "size_bytes": 96,
+      "aligned_size": 128,
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "36": {
+      "name": "model_2_model_1_m_main_1_block_6_expand_Conv2D_weights_fused_bn",
+      "offset": 161536,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        144,
+        24,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "37": {
+      "name": "model_2_model_1_m_main_1_block_6_expand_Conv2D_bias_fused_bn",
+      "offset": 175360,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "38": {
+      "name": "model_2_model_1_m_main_1_block_6_depthwise_depthwise_weights_fused_bn",
+      "offset": 175936,
+      "size_bytes": 5184,
+      "aligned_size": 5184,
+      "shape": [
+        1296
+      ],
+      "dtype": "float32"
+    },
+    "39": {
+      "name": "model_2_model_1_m_main_1_block_6_depthwise_depthwise_bias_fused_bn",
+      "offset": 181120,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "40": {
+      "name": "model_2_model_1_m_main_1_block_6_project_Conv2D_weights_fused_bn",
+      "offset": 181696,
+      "size_bytes": 27648,
+      "aligned_size": 27648,
+      "shape": [
+        48,
+        144,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "41": {
+      "name": "model_2_model_1_m_main_1_block_6_project_Conv2D_bias_fused_bn",
+      "offset": 209344,
+      "size_bytes": 192,
+      "aligned_size": 192,
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "42": {
+      "name": "model_2_model_1_m_main_1_block_7_expand_Conv2D_weights_fused_bn",
+      "offset": 209536,
+      "size_bytes": 55296,
+      "aligned_size": 55296,
+      "shape": [
+        288,
+        48,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "43": {
+      "name": "model_2_model_1_m_main_1_block_7_expand_Conv2D_bias_fused_bn",
+      "offset": 264832,
+      "size_bytes": 1152,
+      "aligned_size": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32"
+    },
+    "44": {
+      "name": "model_2_model_1_m_main_1_block_7_depthwise_depthwise_weights_fused_bn",
+      "offset": 265984,
+      "size_bytes": 10368,
+      "aligned_size": 10368,
+      "shape": [
+        2592
+      ],
+      "dtype": "float32"
+    },
+    "45": {
+      "name": "model_2_model_1_m_main_1_block_7_depthwise_depthwise_bias_fused_bn",
+      "offset": 276352,
+      "size_bytes": 1152,
+      "aligned_size": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32"
+    },
+    "46": {
+      "name": "model_2_model_1_m_main_1_block_7_project_Conv2D_weights_fused_bn",
+      "offset": 277504,
+      "size_bytes": 55296,
+      "aligned_size": 55296,
+      "shape": [
+        48,
+        288,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "47": {
+      "name": "model_2_model_1_m_main_1_block_7_project_Conv2D_bias_fused_bn",
+      "offset": 332800,
+      "size_bytes": 192,
+      "aligned_size": 192,
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "48": {
+      "name": "model_2_model_1_m_main_1_block_8_expand_Conv2D_weights_fused_bn",
+      "offset": 332992,
+      "size_bytes": 55296,
+      "aligned_size": 55296,
+      "shape": [
+        288,
+        48,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "49": {
+      "name": "model_2_model_1_m_main_1_block_8_expand_Conv2D_bias_fused_bn",
+      "offset": 388288,
+      "size_bytes": 1152,
+      "aligned_size": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32"
+    },
+    "50": {
+      "name": "model_2_model_1_m_main_1_block_8_depthwise_depthwise_weights_fused_bn",
+      "offset": 389440,
+      "size_bytes": 10368,
+      "aligned_size": 10368,
+      "shape": [
+        2592
+      ],
+      "dtype": "float32"
+    },
+    "51": {
+      "name": "model_2_model_1_m_main_1_block_8_depthwise_depthwise_bias_fused_bn",
+      "offset": 399808,
+      "size_bytes": 1152,
+      "aligned_size": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32"
+    },
+    "52": {
+      "name": "model_2_model_1_m_main_1_block_8_project_Conv2D_weights_fused_bn",
+      "offset": 400960,
+      "size_bytes": 55296,
+      "aligned_size": 55296,
+      "shape": [
+        48,
+        288,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "53": {
+      "name": "model_2_model_1_m_main_1_block_8_project_Conv2D_bias_fused_bn",
+      "offset": 456256,
+      "size_bytes": 192,
+      "aligned_size": 192,
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "54": {
+      "name": "model_2_model_1_m_main_1_block_9_expand_Conv2D_weights_fused_bn",
+      "offset": 456448,
+      "size_bytes": 55296,
+      "aligned_size": 55296,
+      "shape": [
+        288,
+        48,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "55": {
+      "name": "model_2_model_1_m_main_1_block_9_expand_Conv2D_bias_fused_bn",
+      "offset": 511744,
+      "size_bytes": 1152,
+      "aligned_size": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32"
+    },
+    "56": {
+      "name": "model_2_model_1_m_main_1_block_9_depthwise_depthwise_weights_fused_bn",
+      "offset": 512896,
+      "size_bytes": 10368,
+      "aligned_size": 10368,
+      "shape": [
+        2592
+      ],
+      "dtype": "float32"
+    },
+    "57": {
+      "name": "model_2_model_1_m_main_1_block_9_depthwise_depthwise_bias_fused_bn",
+      "offset": 523264,
+      "size_bytes": 1152,
+      "aligned_size": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32"
+    },
+    "58": {
+      "name": "model_2_model_1_m_main_1_block_9_project_Conv2D_weights_fused_bn",
+      "offset": 524416,
+      "size_bytes": 55296,
+      "aligned_size": 55296,
+      "shape": [
+        48,
+        288,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "59": {
+      "name": "model_2_model_1_m_main_1_block_9_project_Conv2D_bias_fused_bn",
+      "offset": 579712,
+      "size_bytes": 192,
+      "aligned_size": 192,
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "60": {
+      "name": "model_2_model_1_m_main_1_block_10_expand_Conv2D_weights_fused_bn",
+      "offset": 579904,
+      "size_bytes": 55296,
+      "aligned_size": 55296,
+      "shape": [
+        288,
+        48,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "61": {
+      "name": "model_2_model_1_m_main_1_block_10_expand_Conv2D_bias_fused_bn",
+      "offset": 635200,
+      "size_bytes": 1152,
+      "aligned_size": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32"
+    },
+    "62": {
+      "name": "model_2_model_1_m_main_1_block_10_depthwise_depthwise_weights_fused_bn",
+      "offset": 636352,
+      "size_bytes": 10368,
+      "aligned_size": 10368,
+      "shape": [
+        2592
+      ],
+      "dtype": "float32"
+    },
+    "63": {
+      "name": "model_2_model_1_m_main_1_block_10_depthwise_depthwise_bias_fused_bn",
+      "offset": 646720,
+      "size_bytes": 1152,
+      "aligned_size": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32"
+    },
+    "64": {
+      "name": "model_2_model_1_m_main_1_block_10_project_Conv2D_weights_fused_bn",
+      "offset": 647872,
+      "size_bytes": 82944,
+      "aligned_size": 82944,
+      "shape": [
+        72,
+        288,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "65": {
+      "name": "model_2_model_1_m_main_1_block_10_project_Conv2D_bias_fused_bn",
+      "offset": 730816,
+      "size_bytes": 288,
+      "aligned_size": 320,
+      "shape": [
+        72
+      ],
+      "dtype": "float32"
+    },
+    "66": {
+      "name": "model_2_model_1_m_main_1_block_11_expand_Conv2D_weights_fused_bn",
+      "offset": 731136,
+      "size_bytes": 124416,
+      "aligned_size": 124416,
+      "shape": [
+        432,
+        72,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "67": {
+      "name": "model_2_model_1_m_main_1_block_11_expand_Conv2D_bias_fused_bn",
+      "offset": 855552,
+      "size_bytes": 1728,
+      "aligned_size": 1728,
+      "shape": [
+        432
+      ],
+      "dtype": "float32"
+    },
+    "68": {
+      "name": "model_2_model_1_m_main_1_block_11_depthwise_depthwise_weights_fused_bn",
+      "offset": 857280,
+      "size_bytes": 15552,
+      "aligned_size": 15552,
+      "shape": [
+        3888
+      ],
+      "dtype": "float32"
+    },
+    "69": {
+      "name": "model_2_model_1_m_main_1_block_11_depthwise_depthwise_bias_fused_bn",
+      "offset": 872832,
+      "size_bytes": 1728,
+      "aligned_size": 1728,
+      "shape": [
+        432
+      ],
+      "dtype": "float32"
+    },
+    "70": {
+      "name": "model_2_model_1_m_main_1_block_11_project_Conv2D_weights_fused_bn",
+      "offset": 874560,
+      "size_bytes": 124416,
+      "aligned_size": 124416,
+      "shape": [
+        72,
+        432,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "71": {
+      "name": "model_2_model_1_m_main_1_block_11_project_Conv2D_bias_fused_bn",
+      "offset": 998976,
+      "size_bytes": 288,
+      "aligned_size": 320,
+      "shape": [
+        72
+      ],
+      "dtype": "float32"
+    },
+    "72": {
+      "name": "model_2_model_1_m_main_1_block_12_expand_Conv2D_weights_fused_bn",
+      "offset": 999296,
+      "size_bytes": 124416,
+      "aligned_size": 124416,
+      "shape": [
+        432,
+        72,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "73": {
+      "name": "model_2_model_1_m_main_1_block_12_expand_Conv2D_bias_fused_bn",
+      "offset": 1123712,
+      "size_bytes": 1728,
+      "aligned_size": 1728,
+      "shape": [
+        432
+      ],
+      "dtype": "float32"
+    },
+    "74": {
+      "name": "model_2_model_1_m_main_1_block_12_depthwise_depthwise_weights_fused_bn",
+      "offset": 1125440,
+      "size_bytes": 15552,
+      "aligned_size": 15552,
+      "shape": [
+        3888
+      ],
+      "dtype": "float32"
+    },
+    "75": {
+      "name": "model_2_model_1_m_main_1_block_12_depthwise_depthwise_bias_fused_bn",
+      "offset": 1140992,
+      "size_bytes": 1728,
+      "aligned_size": 1728,
+      "shape": [
+        432
+      ],
+      "dtype": "float32"
+    },
+    "76": {
+      "name": "model_2_model_1_m_main_1_block_12_project_Conv2D_weights_fused_bn",
+      "offset": 1142720,
+      "size_bytes": 124416,
+      "aligned_size": 124416,
+      "shape": [
+        72,
+        432,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "77": {
+      "name": "model_2_model_1_m_main_1_block_12_project_Conv2D_bias_fused_bn",
+      "offset": 1267136,
+      "size_bytes": 288,
+      "aligned_size": 320,
+      "shape": [
+        72
+      ],
+      "dtype": "float32"
+    },
+    "78": {
+      "name": "model_2_model_1_m_main_1_block_13_expand_Conv2D_weights_fused_bn",
+      "offset": 1267456,
+      "size_bytes": 124416,
+      "aligned_size": 124416,
+      "shape": [
+        432,
+        72,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "79": {
+      "name": "model_2_model_1_m_main_1_block_13_expand_Conv2D_bias_fused_bn",
+      "offset": 1391872,
+      "size_bytes": 1728,
+      "aligned_size": 1728,
+      "shape": [
+        432
+      ],
+      "dtype": "float32"
+    },
+    "80": {
+      "name": "model_2_model_1_m_main_1_block_13_depthwise_depthwise_weights_fused_bn",
+      "offset": 1393600,
+      "size_bytes": 15552,
+      "aligned_size": 15552,
+      "shape": [
+        3888
+      ],
+      "dtype": "float32"
+    },
+    "81": {
+      "name": "model_2_model_1_m_main_1_block_13_depthwise_depthwise_bias_fused_bn",
+      "offset": 1409152,
+      "size_bytes": 1728,
+      "aligned_size": 1728,
+      "shape": [
+        432
+      ],
+      "dtype": "float32"
+    },
+    "82": {
+      "name": "model_2_model_1_m_main_1_block_13_project_Conv2D_weights_fused_bn",
+      "offset": 1410880,
+      "size_bytes": 207360,
+      "aligned_size": 207360,
+      "shape": [
+        120,
+        432,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "83": {
+      "name": "model_2_model_1_m_main_1_block_13_project_Conv2D_bias_fused_bn",
+      "offset": 1618240,
+      "size_bytes": 480,
+      "aligned_size": 512,
+      "shape": [
+        120
+      ],
+      "dtype": "float32"
+    },
+    "84": {
+      "name": "model_2_model_1_m_main_1_block_14_expand_Conv2D_weights_fused_bn",
+      "offset": 1618752,
+      "size_bytes": 345600,
+      "aligned_size": 345600,
+      "shape": [
+        720,
+        120,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "85": {
+      "name": "model_2_model_1_m_main_1_block_14_expand_Conv2D_bias_fused_bn",
+      "offset": 1964352,
+      "size_bytes": 2880,
+      "aligned_size": 2880,
+      "shape": [
+        720
+      ],
+      "dtype": "float32"
+    },
+    "86": {
+      "name": "model_2_model_1_m_main_1_block_14_depthwise_depthwise_weights_fused_bn",
+      "offset": 1967232,
+      "size_bytes": 25920,
+      "aligned_size": 25920,
+      "shape": [
+        6480
+      ],
+      "dtype": "float32"
+    },
+    "87": {
+      "name": "model_2_model_1_m_main_1_block_14_depthwise_depthwise_bias_fused_bn",
+      "offset": 1993152,
+      "size_bytes": 2880,
+      "aligned_size": 2880,
+      "shape": [
+        720
+      ],
+      "dtype": "float32"
+    },
+    "88": {
+      "name": "model_2_model_1_m_main_1_block_14_project_Conv2D_weights_fused_bn",
+      "offset": 1996032,
+      "size_bytes": 345600,
+      "aligned_size": 345600,
+      "shape": [
+        120,
+        720,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "89": {
+      "name": "model_2_model_1_m_main_1_block_14_project_Conv2D_bias_fused_bn",
+      "offset": 2341632,
+      "size_bytes": 480,
+      "aligned_size": 512,
+      "shape": [
+        120
+      ],
+      "dtype": "float32"
+    },
+    "90": {
+      "name": "model_2_model_1_m_main_1_block_15_expand_Conv2D_weights_fused_bn",
+      "offset": 2342144,
+      "size_bytes": 345600,
+      "aligned_size": 345600,
+      "shape": [
+        720,
+        120,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "91": {
+      "name": "model_2_model_1_m_main_1_block_15_expand_Conv2D_bias_fused_bn",
+      "offset": 2687744,
+      "size_bytes": 2880,
+      "aligned_size": 2880,
+      "shape": [
+        720
+      ],
+      "dtype": "float32"
+    },
+    "92": {
+      "name": "model_2_model_1_m_main_1_block_15_depthwise_depthwise_weights_fused_bn",
+      "offset": 2690624,
+      "size_bytes": 25920,
+      "aligned_size": 25920,
+      "shape": [
+        6480
+      ],
+      "dtype": "float32"
+    },
+    "93": {
+      "name": "model_2_model_1_m_main_1_block_15_depthwise_depthwise_bias_fused_bn",
+      "offset": 2716544,
+      "size_bytes": 2880,
+      "aligned_size": 2880,
+      "shape": [
+        720
+      ],
+      "dtype": "float32"
+    },
+    "94": {
+      "name": "model_2_model_1_m_main_1_block_15_project_Conv2D_weights_fused_bn",
+      "offset": 2719424,
+      "size_bytes": 345600,
+      "aligned_size": 345600,
+      "shape": [
+        120,
+        720,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "95": {
+      "name": "model_2_model_1_m_main_1_block_15_project_Conv2D_bias_fused_bn",
+      "offset": 3065024,
+      "size_bytes": 480,
+      "aligned_size": 512,
+      "shape": [
+        120
+      ],
+      "dtype": "float32"
+    },
+    "96": {
+      "name": "model_2_model_1_m_main_1_block_16_expand_Conv2D_weights_fused_bn",
+      "offset": 3065536,
+      "size_bytes": 345600,
+      "aligned_size": 345600,
+      "shape": [
+        720,
+        120,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "97": {
+      "name": "model_2_model_1_m_main_1_block_16_expand_Conv2D_bias_fused_bn",
+      "offset": 3411136,
+      "size_bytes": 2880,
+      "aligned_size": 2880,
+      "shape": [
+        720
+      ],
+      "dtype": "float32"
+    },
+    "98": {
+      "name": "model_2_model_1_m_main_1_block_16_depthwise_depthwise_weights_fused_bn",
+      "offset": 3414016,
+      "size_bytes": 25920,
+      "aligned_size": 25920,
+      "shape": [
+        6480
+      ],
+      "dtype": "float32"
+    },
+    "99": {
+      "name": "model_2_model_1_m_main_1_block_16_depthwise_depthwise_bias_fused_bn",
+      "offset": 3439936,
+      "size_bytes": 2880,
+      "aligned_size": 2880,
+      "shape": [
+        720
+      ],
+      "dtype": "float32"
+    },
+    "100": {
+      "name": "model_2_model_1_m_main_1_block_16_project_Conv2D_weights_fused_bn",
+      "offset": 3442816,
+      "size_bytes": 691200,
+      "aligned_size": 691200,
+      "shape": [
+        240,
+        720,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "101": {
+      "name": "model_2_model_1_m_main_1_block_16_project_Conv2D_bias_fused_bn",
+      "offset": 4134016,
+      "size_bytes": 960,
+      "aligned_size": 960,
+      "shape": [
+        240
+      ],
+      "dtype": "float32"
+    },
+    "102": {
+      "name": "model_2_model_1_m_main_1_Conv_1_Conv2D_weights_fused_bn",
+      "offset": 4134976,
+      "size_bytes": 1228800,
+      "aligned_size": 1228800,
+      "shape": [
+        1280,
+        240,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "103": {
+      "name": "model_2_model_1_m_main_1_Conv_1_Conv2D_bias_fused_bn",
+      "offset": 5363776,
+      "size_bytes": 5120,
+      "aligned_size": 5120,
+      "shape": [
+        1280
+      ],
+      "dtype": "float32"
+    },
+    "104": {
+      "name": "model_2_model_m_main_0_Conv1_Conv2D_weights_fused_bn",
+      "offset": 5368896,
+      "size_bytes": 3456,
+      "aligned_size": 3456,
+      "shape": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "105": {
+      "name": "model_2_model_m_main_0_Conv1_Conv2D_bias_fused_bn",
+      "offset": 5372352,
+      "size_bytes": 128,
+      "aligned_size": 128,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "106": {
+      "name": "model_2_model_m_main_0_expanded_conv_depthwise_depthwise_weights_fused_bn",
+      "offset": 5372480,
+      "size_bytes": 1152,
+      "aligned_size": 1152,
+      "shape": [
+        288
+      ],
+      "dtype": "float32"
+    },
+    "107": {
+      "name": "model_2_model_m_main_0_expanded_conv_depthwise_depthwise_bias_fused_bn",
+      "offset": 5373632,
+      "size_bytes": 128,
+      "aligned_size": 128,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "108": {
+      "name": "model_2_model_m_main_0_expanded_conv_project_Conv2D_weights_fused_bn",
+      "offset": 5373760,
+      "size_bytes": 2048,
+      "aligned_size": 2048,
+      "shape": [
+        16,
+        32,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "109": {
+      "name": "model_2_model_m_main_0_expanded_conv_project_Conv2D_bias_fused_bn",
+      "offset": 5375808,
+      "size_bytes": 64,
+      "aligned_size": 64,
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "110": {
+      "name": "model_2_model_m_main_0_block_1_expand_Conv2D_weights_fused_bn",
+      "offset": 5375872,
+      "size_bytes": 6144,
+      "aligned_size": 6144,
+      "shape": [
+        96,
+        16,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "111": {
+      "name": "model_2_model_m_main_0_block_1_expand_Conv2D_bias_fused_bn",
+      "offset": 5382016,
+      "size_bytes": 384,
+      "aligned_size": 384,
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "112": {
+      "name": "model_2_model_m_main_0_block_1_depthwise_depthwise_weights_fused_bn",
+      "offset": 5382400,
+      "size_bytes": 3456,
+      "aligned_size": 3456,
+      "shape": [
+        864
+      ],
+      "dtype": "float32"
+    },
+    "113": {
+      "name": "model_2_model_m_main_0_block_1_depthwise_depthwise_bias_fused_bn",
+      "offset": 5385856,
+      "size_bytes": 384,
+      "aligned_size": 384,
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "114": {
+      "name": "model_2_model_m_main_0_block_1_project_Conv2D_weights_fused_bn",
+      "offset": 5386240,
+      "size_bytes": 9216,
+      "aligned_size": 9216,
+      "shape": [
+        24,
+        96,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "115": {
+      "name": "model_2_model_m_main_0_block_1_project_Conv2D_bias_fused_bn",
+      "offset": 5395456,
+      "size_bytes": 96,
+      "aligned_size": 128,
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "116": {
+      "name": "model_2_model_m_main_0_block_2_expand_Conv2D_weights_fused_bn",
+      "offset": 5395584,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        144,
+        24,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "117": {
+      "name": "model_2_model_m_main_0_block_2_expand_Conv2D_bias_fused_bn",
+      "offset": 5409408,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "118": {
+      "name": "model_2_model_m_main_0_block_2_depthwise_depthwise_weights_fused_bn",
+      "offset": 5409984,
+      "size_bytes": 5184,
+      "aligned_size": 5184,
+      "shape": [
+        1296
+      ],
+      "dtype": "float32"
+    },
+    "119": {
+      "name": "model_2_model_m_main_0_block_2_depthwise_depthwise_bias_fused_bn",
+      "offset": 5415168,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "120": {
+      "name": "model_2_model_m_main_0_block_2_project_Conv2D_weights_fused_bn",
+      "offset": 5415744,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        24,
+        144,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "121": {
+      "name": "model_2_model_m_main_0_block_2_project_Conv2D_bias_fused_bn",
+      "offset": 5429568,
+      "size_bytes": 96,
+      "aligned_size": 128,
+      "shape": [
+        24
+      ],
+      "dtype": "float32"
+    },
+    "122": {
+      "name": "model_2_model_m_main_0_block_3_expand_Conv2D_weights_fused_bn",
+      "offset": 5429696,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        144,
+        24,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "123": {
+      "name": "model_2_model_m_main_0_block_3_expand_Conv2D_bias_fused_bn",
+      "offset": 5443520,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "124": {
+      "name": "model_2_model_m_main_0_block_3_depthwise_depthwise_weights_fused_bn",
+      "offset": 5444096,
+      "size_bytes": 5184,
+      "aligned_size": 5184,
+      "shape": [
+        1296
+      ],
+      "dtype": "float32"
+    },
+    "125": {
+      "name": "model_2_model_m_main_0_block_3_depthwise_depthwise_bias_fused_bn",
+      "offset": 5449280,
+      "size_bytes": 576,
+      "aligned_size": 576,
+      "shape": [
+        144
+      ],
+      "dtype": "float32"
+    },
+    "126": {
+      "name": "model_2_model_m_main_0_block_3_project_Conv2D_weights_fused_bn",
+      "offset": 5449856,
+      "size_bytes": 18432,
+      "aligned_size": 18432,
+      "shape": [
+        32,
+        144,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "127": {
+      "name": "model_2_model_m_main_0_block_3_project_Conv2D_bias_fused_bn",
+      "offset": 5468288,
+      "size_bytes": 128,
+      "aligned_size": 128,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "128": {
+      "name": "model_2_model_m_main_0_block_4_expand_Conv2D_weights_fused_bn",
+      "offset": 5468416,
+      "size_bytes": 24576,
+      "aligned_size": 24576,
+      "shape": [
+        192,
+        32,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "129": {
+      "name": "model_2_model_m_main_0_block_4_expand_Conv2D_bias_fused_bn",
+      "offset": 5492992,
+      "size_bytes": 768,
+      "aligned_size": 768,
+      "shape": [
+        192
+      ],
+      "dtype": "float32"
+    },
+    "130": {
+      "name": "model_2_model_m_main_0_block_4_depthwise_depthwise_weights_fused_bn",
+      "offset": 5493760,
+      "size_bytes": 6912,
+      "aligned_size": 6912,
+      "shape": [
+        1728
+      ],
+      "dtype": "float32"
+    },
+    "131": {
+      "name": "model_2_model_m_main_0_block_4_depthwise_depthwise_bias_fused_bn",
+      "offset": 5500672,
+      "size_bytes": 768,
+      "aligned_size": 768,
+      "shape": [
+        192
+      ],
+      "dtype": "float32"
+    },
+    "132": {
+      "name": "model_2_model_m_main_0_block_4_project_Conv2D_weights_fused_bn",
+      "offset": 5501440,
+      "size_bytes": 24576,
+      "aligned_size": 24576,
+      "shape": [
+        32,
+        192,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "133": {
+      "name": "model_2_model_m_main_0_block_4_project_Conv2D_bias_fused_bn",
+      "offset": 5526016,
+      "size_bytes": 128,
+      "aligned_size": 128,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "134": {
+      "name": "model_2_model_m_main_0_block_5_expand_Conv2D_weights_fused_bn",
+      "offset": 5526144,
+      "size_bytes": 24576,
+      "aligned_size": 24576,
+      "shape": [
+        192,
+        32,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "135": {
+      "name": "model_2_model_m_main_0_block_5_expand_Conv2D_bias_fused_bn",
+      "offset": 5550720,
+      "size_bytes": 768,
+      "aligned_size": 768,
+      "shape": [
+        192
+      ],
+      "dtype": "float32"
+    },
+    "136": {
+      "name": "model_2_model_m_main_0_block_5_depthwise_depthwise_weights_fused_bn",
+      "offset": 5551488,
+      "size_bytes": 6912,
+      "aligned_size": 6912,
+      "shape": [
+        1728
+      ],
+      "dtype": "float32"
+    },
+    "137": {
+      "name": "model_2_model_m_main_0_block_5_depthwise_depthwise_bias_fused_bn",
+      "offset": 5558400,
+      "size_bytes": 768,
+      "aligned_size": 768,
+      "shape": [
+        192
+      ],
+      "dtype": "float32"
+    },
+    "138": {
+      "name": "model_2_model_m_main_0_block_5_project_Conv2D_weights_fused_bn",
+      "offset": 5559168,
+      "size_bytes": 24576,
+      "aligned_size": 24576,
+      "shape": [
+        32,
+        192,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "139": {
+      "name": "model_2_model_m_main_0_block_5_project_Conv2D_bias_fused_bn",
+      "offset": 5583744,
+      "size_bytes": 128,
+      "aligned_size": 128,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "140": {
+      "name": "model_2_model_m_main_0_block_6_expand_Conv2D_weights_fused_bn",
+      "offset": 5583872,
+      "size_bytes": 24576,
+      "aligned_size": 24576,
+      "shape": [
+        192,
+        32,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "141": {
+      "name": "model_2_model_m_main_0_block_6_expand_Conv2D_bias_fused_bn",
+      "offset": 5608448,
+      "size_bytes": 768,
+      "aligned_size": 768,
+      "shape": [
+        192
+      ],
+      "dtype": "float32"
+    },
+    "142": {
+      "name": "model_2_model_m_main_0_block_6_depthwise_depthwise_weights_fused_bn",
+      "offset": 5609216,
+      "size_bytes": 6912,
+      "aligned_size": 6912,
+      "shape": [
+        1728
+      ],
+      "dtype": "float32"
+    },
+    "143": {
+      "name": "model_2_model_m_main_0_block_6_depthwise_depthwise_bias_fused_bn",
+      "offset": 5616128,
+      "size_bytes": 768,
+      "aligned_size": 768,
+      "shape": [
+        192
+      ],
+      "dtype": "float32"
+    },
+    "144": {
+      "name": "model_2_model_m_main_0_block_6_project_Conv2D_weights_fused_bn",
+      "offset": 5616896,
+      "size_bytes": 49152,
+      "aligned_size": 49152,
+      "shape": [
+        64,
+        192,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "145": {
+      "name": "model_2_model_m_main_0_block_6_project_Conv2D_bias_fused_bn",
+      "offset": 5666048,
+      "size_bytes": 256,
+      "aligned_size": 256,
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "146": {
+      "name": "model_2_model_m_main_0_block_7_expand_Conv2D_weights_fused_bn",
+      "offset": 5666304,
+      "size_bytes": 98304,
+      "aligned_size": 98304,
+      "shape": [
+        384,
+        64,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "147": {
+      "name": "model_2_model_m_main_0_block_7_expand_Conv2D_bias_fused_bn",
+      "offset": 5764608,
+      "size_bytes": 1536,
+      "aligned_size": 1536,
+      "shape": [
+        384
+      ],
+      "dtype": "float32"
+    },
+    "148": {
+      "name": "model_2_model_m_main_0_block_7_depthwise_depthwise_weights_fused_bn",
+      "offset": 5766144,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        3456
+      ],
+      "dtype": "float32"
+    },
+    "149": {
+      "name": "model_2_model_m_main_0_block_7_depthwise_depthwise_bias_fused_bn",
+      "offset": 5779968,
+      "size_bytes": 1536,
+      "aligned_size": 1536,
+      "shape": [
+        384
+      ],
+      "dtype": "float32"
+    },
+    "150": {
+      "name": "model_2_model_m_main_0_block_7_project_Conv2D_weights_fused_bn",
+      "offset": 5781504,
+      "size_bytes": 98304,
+      "aligned_size": 98304,
+      "shape": [
+        64,
+        384,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "151": {
+      "name": "model_2_model_m_main_0_block_7_project_Conv2D_bias_fused_bn",
+      "offset": 5879808,
+      "size_bytes": 256,
+      "aligned_size": 256,
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "152": {
+      "name": "model_2_model_m_main_0_block_8_expand_Conv2D_weights_fused_bn",
+      "offset": 5880064,
+      "size_bytes": 98304,
+      "aligned_size": 98304,
+      "shape": [
+        384,
+        64,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "153": {
+      "name": "model_2_model_m_main_0_block_8_expand_Conv2D_bias_fused_bn",
+      "offset": 5978368,
+      "size_bytes": 1536,
+      "aligned_size": 1536,
+      "shape": [
+        384
+      ],
+      "dtype": "float32"
+    },
+    "154": {
+      "name": "model_2_model_m_main_0_block_8_depthwise_depthwise_weights_fused_bn",
+      "offset": 5979904,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        3456
+      ],
+      "dtype": "float32"
+    },
+    "155": {
+      "name": "model_2_model_m_main_0_block_8_depthwise_depthwise_bias_fused_bn",
+      "offset": 5993728,
+      "size_bytes": 1536,
+      "aligned_size": 1536,
+      "shape": [
+        384
+      ],
+      "dtype": "float32"
+    },
+    "156": {
+      "name": "model_2_model_m_main_0_block_8_project_Conv2D_weights_fused_bn",
+      "offset": 5995264,
+      "size_bytes": 98304,
+      "aligned_size": 98304,
+      "shape": [
+        64,
+        384,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "157": {
+      "name": "model_2_model_m_main_0_block_8_project_Conv2D_bias_fused_bn",
+      "offset": 6093568,
+      "size_bytes": 256,
+      "aligned_size": 256,
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "158": {
+      "name": "model_2_model_m_main_0_block_9_expand_Conv2D_weights_fused_bn",
+      "offset": 6093824,
+      "size_bytes": 98304,
+      "aligned_size": 98304,
+      "shape": [
+        384,
+        64,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "159": {
+      "name": "model_2_model_m_main_0_block_9_expand_Conv2D_bias_fused_bn",
+      "offset": 6192128,
+      "size_bytes": 1536,
+      "aligned_size": 1536,
+      "shape": [
+        384
+      ],
+      "dtype": "float32"
+    },
+    "160": {
+      "name": "model_2_model_m_main_0_block_9_depthwise_depthwise_weights_fused_bn",
+      "offset": 6193664,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        3456
+      ],
+      "dtype": "float32"
+    },
+    "161": {
+      "name": "model_2_model_m_main_0_block_9_depthwise_depthwise_bias_fused_bn",
+      "offset": 6207488,
+      "size_bytes": 1536,
+      "aligned_size": 1536,
+      "shape": [
+        384
+      ],
+      "dtype": "float32"
+    },
+    "162": {
+      "name": "model_2_model_m_main_0_block_9_project_Conv2D_weights_fused_bn",
+      "offset": 6209024,
+      "size_bytes": 98304,
+      "aligned_size": 98304,
+      "shape": [
+        64,
+        384,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "163": {
+      "name": "model_2_model_m_main_0_block_9_project_Conv2D_bias_fused_bn",
+      "offset": 6307328,
+      "size_bytes": 256,
+      "aligned_size": 256,
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "164": {
+      "name": "model_2_model_m_main_0_block_10_expand_Conv2D_weights_fused_bn",
+      "offset": 6307584,
+      "size_bytes": 98304,
+      "aligned_size": 98304,
+      "shape": [
+        384,
+        64,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "165": {
+      "name": "model_2_model_m_main_0_block_10_expand_Conv2D_bias_fused_bn",
+      "offset": 6405888,
+      "size_bytes": 1536,
+      "aligned_size": 1536,
+      "shape": [
+        384
+      ],
+      "dtype": "float32"
+    },
+    "166": {
+      "name": "model_2_model_m_main_0_block_10_depthwise_depthwise_weights_fused_bn",
+      "offset": 6407424,
+      "size_bytes": 13824,
+      "aligned_size": 13824,
+      "shape": [
+        3456
+      ],
+      "dtype": "float32"
+    },
+    "167": {
+      "name": "model_2_model_m_main_0_block_10_depthwise_depthwise_bias_fused_bn",
+      "offset": 6421248,
+      "size_bytes": 1536,
+      "aligned_size": 1536,
+      "shape": [
+        384
+      ],
+      "dtype": "float32"
+    },
+    "168": {
+      "name": "model_2_model_m_main_0_block_10_project_Conv2D_weights_fused_bn",
+      "offset": 6422784,
+      "size_bytes": 147456,
+      "aligned_size": 147456,
+      "shape": [
+        96,
+        384,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "169": {
+      "name": "model_2_model_m_main_0_block_10_project_Conv2D_bias_fused_bn",
+      "offset": 6570240,
+      "size_bytes": 384,
+      "aligned_size": 384,
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "170": {
+      "name": "model_2_model_m_main_0_block_11_expand_Conv2D_weights_fused_bn",
+      "offset": 6570624,
+      "size_bytes": 221184,
+      "aligned_size": 221184,
+      "shape": [
+        576,
+        96,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "171": {
+      "name": "model_2_model_m_main_0_block_11_expand_Conv2D_bias_fused_bn",
+      "offset": 6791808,
+      "size_bytes": 2304,
+      "aligned_size": 2304,
+      "shape": [
+        576
+      ],
+      "dtype": "float32"
+    },
+    "172": {
+      "name": "model_2_model_m_main_0_block_11_depthwise_depthwise_weights_fused_bn",
+      "offset": 6794112,
+      "size_bytes": 20736,
+      "aligned_size": 20736,
+      "shape": [
+        5184
+      ],
+      "dtype": "float32"
+    },
+    "173": {
+      "name": "model_2_model_m_main_0_block_11_depthwise_depthwise_bias_fused_bn",
+      "offset": 6814848,
+      "size_bytes": 2304,
+      "aligned_size": 2304,
+      "shape": [
+        576
+      ],
+      "dtype": "float32"
+    },
+    "174": {
+      "name": "model_2_model_m_main_0_block_11_project_Conv2D_weights_fused_bn",
+      "offset": 6817152,
+      "size_bytes": 221184,
+      "aligned_size": 221184,
+      "shape": [
+        96,
+        576,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "175": {
+      "name": "model_2_model_m_main_0_block_11_project_Conv2D_bias_fused_bn",
+      "offset": 7038336,
+      "size_bytes": 384,
+      "aligned_size": 384,
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "176": {
+      "name": "model_2_model_m_main_0_block_12_expand_Conv2D_weights_fused_bn",
+      "offset": 7038720,
+      "size_bytes": 221184,
+      "aligned_size": 221184,
+      "shape": [
+        576,
+        96,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "177": {
+      "name": "model_2_model_m_main_0_block_12_expand_Conv2D_bias_fused_bn",
+      "offset": 7259904,
+      "size_bytes": 2304,
+      "aligned_size": 2304,
+      "shape": [
+        576
+      ],
+      "dtype": "float32"
+    },
+    "178": {
+      "name": "model_2_model_m_main_0_block_12_depthwise_depthwise_weights_fused_bn",
+      "offset": 7262208,
+      "size_bytes": 20736,
+      "aligned_size": 20736,
+      "shape": [
+        5184
+      ],
+      "dtype": "float32"
+    },
+    "179": {
+      "name": "model_2_model_m_main_0_block_12_depthwise_depthwise_bias_fused_bn",
+      "offset": 7282944,
+      "size_bytes": 2304,
+      "aligned_size": 2304,
+      "shape": [
+        576
+      ],
+      "dtype": "float32"
+    },
+    "180": {
+      "name": "model_2_model_m_main_0_block_12_project_Conv2D_weights_fused_bn",
+      "offset": 7285248,
+      "size_bytes": 221184,
+      "aligned_size": 221184,
+      "shape": [
+        96,
+        576,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "181": {
+      "name": "model_2_model_m_main_0_block_12_project_Conv2D_bias_fused_bn",
+      "offset": 7506432,
+      "size_bytes": 384,
+      "aligned_size": 384,
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "182": {
+      "name": "model_2_model_m_main_0_block_13_expand_Conv2D_weights_fused_bn",
+      "offset": 7506816,
+      "size_bytes": 221184,
+      "aligned_size": 221184,
+      "shape": [
+        576,
+        96,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "183": {
+      "name": "model_2_model_m_main_0_block_13_expand_Conv2D_bias_fused_bn",
+      "offset": 7728000,
+      "size_bytes": 2304,
+      "aligned_size": 2304,
+      "shape": [
+        576
+      ],
+      "dtype": "float32"
+    },
+    "184": {
+      "name": "model_2_model_m_main_0_block_13_depthwise_depthwise_weights_fused_bn",
+      "offset": 7730304,
+      "size_bytes": 20736,
+      "aligned_size": 20736,
+      "shape": [
+        5184
+      ],
+      "dtype": "float32"
+    },
+    "185": {
+      "name": "model_2_model_m_main_0_block_13_depthwise_depthwise_bias_fused_bn",
+      "offset": 7751040,
+      "size_bytes": 2304,
+      "aligned_size": 2304,
+      "shape": [
+        576
+      ],
+      "dtype": "float32"
+    },
+    "186": {
+      "name": "model_2_model_m_main_0_block_13_project_Conv2D_weights_fused_bn",
+      "offset": 7753344,
+      "size_bytes": 368640,
+      "aligned_size": 368640,
+      "shape": [
+        160,
+        576,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "187": {
+      "name": "model_2_model_m_main_0_block_13_project_Conv2D_bias_fused_bn",
+      "offset": 8121984,
+      "size_bytes": 640,
+      "aligned_size": 640,
+      "shape": [
+        160
+      ],
+      "dtype": "float32"
+    },
+    "188": {
+      "name": "model_2_model_m_main_0_block_14_expand_Conv2D_weights_fused_bn",
+      "offset": 8122624,
+      "size_bytes": 614400,
+      "aligned_size": 614400,
+      "shape": [
+        960,
+        160,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "189": {
+      "name": "model_2_model_m_main_0_block_14_expand_Conv2D_bias_fused_bn",
+      "offset": 8737024,
+      "size_bytes": 3840,
+      "aligned_size": 3840,
+      "shape": [
+        960
+      ],
+      "dtype": "float32"
+    },
+    "190": {
+      "name": "model_2_model_m_main_0_block_14_depthwise_depthwise_weights_fused_bn",
+      "offset": 8740864,
+      "size_bytes": 34560,
+      "aligned_size": 34560,
+      "shape": [
+        8640
+      ],
+      "dtype": "float32"
+    },
+    "191": {
+      "name": "model_2_model_m_main_0_block_14_depthwise_depthwise_bias_fused_bn",
+      "offset": 8775424,
+      "size_bytes": 3840,
+      "aligned_size": 3840,
+      "shape": [
+        960
+      ],
+      "dtype": "float32"
+    },
+    "192": {
+      "name": "model_2_model_m_main_0_block_14_project_Conv2D_weights_fused_bn",
+      "offset": 8779264,
+      "size_bytes": 614400,
+      "aligned_size": 614400,
+      "shape": [
+        160,
+        960,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "193": {
+      "name": "model_2_model_m_main_0_block_14_project_Conv2D_bias_fused_bn",
+      "offset": 9393664,
+      "size_bytes": 640,
+      "aligned_size": 640,
+      "shape": [
+        160
+      ],
+      "dtype": "float32"
+    },
+    "194": {
+      "name": "model_2_model_m_main_0_block_15_expand_Conv2D_weights_fused_bn",
+      "offset": 9394304,
+      "size_bytes": 614400,
+      "aligned_size": 614400,
+      "shape": [
+        960,
+        160,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "195": {
+      "name": "model_2_model_m_main_0_block_15_expand_Conv2D_bias_fused_bn",
+      "offset": 10008704,
+      "size_bytes": 3840,
+      "aligned_size": 3840,
+      "shape": [
+        960
+      ],
+      "dtype": "float32"
+    },
+    "196": {
+      "name": "model_2_model_m_main_0_block_15_depthwise_depthwise_weights_fused_bn",
+      "offset": 10012544,
+      "size_bytes": 34560,
+      "aligned_size": 34560,
+      "shape": [
+        8640
+      ],
+      "dtype": "float32"
+    },
+    "197": {
+      "name": "model_2_model_m_main_0_block_15_depthwise_depthwise_bias_fused_bn",
+      "offset": 10047104,
+      "size_bytes": 3840,
+      "aligned_size": 3840,
+      "shape": [
+        960
+      ],
+      "dtype": "float32"
+    },
+    "198": {
+      "name": "model_2_model_m_main_0_block_15_project_Conv2D_weights_fused_bn",
+      "offset": 10050944,
+      "size_bytes": 614400,
+      "aligned_size": 614400,
+      "shape": [
+        160,
+        960,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "199": {
+      "name": "model_2_model_m_main_0_block_15_project_Conv2D_bias_fused_bn",
+      "offset": 10665344,
+      "size_bytes": 640,
+      "aligned_size": 640,
+      "shape": [
+        160
+      ],
+      "dtype": "float32"
+    },
+    "200": {
+      "name": "model_2_model_m_main_0_block_16_expand_Conv2D_weights_fused_bn",
+      "offset": 10665984,
+      "size_bytes": 614400,
+      "aligned_size": 614400,
+      "shape": [
+        960,
+        160,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "201": {
+      "name": "model_2_model_m_main_0_block_16_expand_Conv2D_bias_fused_bn",
+      "offset": 11280384,
+      "size_bytes": 3840,
+      "aligned_size": 3840,
+      "shape": [
+        960
+      ],
+      "dtype": "float32"
+    },
+    "202": {
+      "name": "model_2_model_m_main_0_block_16_depthwise_depthwise_weights_fused_bn",
+      "offset": 11284224,
+      "size_bytes": 34560,
+      "aligned_size": 34560,
+      "shape": [
+        8640
+      ],
+      "dtype": "float32"
+    },
+    "203": {
+      "name": "model_2_model_m_main_0_block_16_depthwise_depthwise_bias_fused_bn",
+      "offset": 11318784,
+      "size_bytes": 3840,
+      "aligned_size": 3840,
+      "shape": [
+        960
+      ],
+      "dtype": "float32"
+    },
+    "204": {
+      "name": "model_2_model_m_main_0_block_16_project_Conv2D_weights_fused_bn",
+      "offset": 11322624,
+      "size_bytes": 1228800,
+      "aligned_size": 1228800,
+      "shape": [
+        320,
+        960,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "205": {
+      "name": "model_2_model_m_main_0_block_16_project_Conv2D_bias_fused_bn",
+      "offset": 12551424,
+      "size_bytes": 1280,
+      "aligned_size": 1280,
+      "shape": [
+        320
+      ],
+      "dtype": "float32"
+    },
+    "206": {
+      "name": "model_2_model_m_main_0_Conv_1_Conv2D_weights_fused_bn",
+      "offset": 12552704,
+      "size_bytes": 1638400,
+      "aligned_size": 1638400,
+      "shape": [
+        1280,
+        320,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "207": {
+      "name": "model_2_model_m_main_0_Conv_1_Conv2D_bias_fused_bn",
+      "offset": 14191104,
+      "size_bytes": 5120,
+      "aligned_size": 5120,
+      "shape": [
+        1280
+      ],
+      "dtype": "float32"
+    },
+    "208": {
+      "name": "model_2_model_1_m_main_1_logit_MatMul_ReadVariableOp_0",
+      "offset": 14196224,
+      "size_bytes": 4418560,
+      "aligned_size": 4418560,
+      "shape": [
+        1280,
+        863
+      ],
+      "dtype": "float32"
+    },
+    "209": {
+      "name": "model_2_model_1_m_main_1_logit_BiasAdd_ReadVariableOp_0",
+      "offset": 18614784,
+      "size_bytes": 3452,
+      "aligned_size": 3456,
+      "shape": [
+        863
+      ],
+      "dtype": "float32"
+    },
+    "210": {
+      "name": "model_2_model_m_main_0_logit_MatMul_ReadVariableOp_0",
+      "offset": 18618240,
+      "size_bytes": 4418560,
+      "aligned_size": 4418560,
+      "shape": [
+        1280,
+        863
+      ],
+      "dtype": "float32"
+    },
+    "211": {
+      "name": "model_2_model_m_main_0_logit_BiasAdd_ReadVariableOp_0",
+      "offset": 23036800,
+      "size_bytes": 3452,
+      "aligned_size": 3456,
+      "shape": [
+        863
+      ],
+      "dtype": "float32"
+    }
+  }
+}
