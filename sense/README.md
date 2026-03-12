@@ -4,7 +4,7 @@ SENSE is the user-facing interface layer for the SENSE-TVM pipeline. It loads a 
 
 ## Architecture
 
-<img src="../readme/sense.png" alt="SENSE Architecture" width="720" />
+<img src="../readme/sense.png" alt="SENSE Architecture" width="360" />
 
 The SENSE flow is centered around the `Sense` class in [`sense.py`](/Users/gyujinkim/Desktop/cochl/sense-tvm/sense/sense.py). The pipeline is executed in a fixed order:
 
