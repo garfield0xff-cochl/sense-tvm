@@ -101,7 +101,7 @@ fi
 section "Exporting runtime environment"
 export TVM_HOME="$ROOT_DIR"
 export TVM_LIBRARY_PATH="$BUILD_DIR"
-export PYTHONPATH="$ROOT_DIR/python${PYTHONPATH:+:$PYTHONPATH}"
+export PYTHONPATH="$ROOT_DIR/python"
 
 info "TVM_HOME=$TVM_HOME"
 info "TVM_LIBRARY_PATH=$TVM_LIBRARY_PATH"
