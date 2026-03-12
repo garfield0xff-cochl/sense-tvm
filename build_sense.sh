@@ -107,9 +107,9 @@ info "TVM_HOME=$TVM_HOME"
 info "TVM_LIBRARY_PATH=$TVM_LIBRARY_PATH"
 info "PYTHONPATH=$PYTHONPATH"
 
-section "Installing editable python packages"
-(cd "$ROOT_DIR/3rdparty/tvm-ffi" && python --version && CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install -e .)
-(cd "$ROOT_DIR" && python --version && CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install -e .)
+section "Reinstalling editable python packages"
+(cd "$ROOT_DIR/3rdparty/tvm-ffi" && python --version && CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install --no-cache-dir --force-reinstall -e .)
+(cd "$ROOT_DIR" && python --version && CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install --no-cache-dir --force-reinstall -e .)
 
 section "Synchronizing version metadata"
 (cd "$ROOT_DIR" && python version.py)
