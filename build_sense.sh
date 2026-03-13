@@ -114,8 +114,8 @@ info "PYTHONPATH=$PYTHONPATH"
 info "DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH"
 
 section "Reinstalling editable python packages"
-(cd "$ROOT_DIR/3rdparty/tvm-ffi" && env -u DYLD_LIBRARY_PATH python --version && env -u DYLD_LIBRARY_PATH CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install --no-cache-dir --force-reinstall -e .)
-(cd "$ROOT_DIR" && env -u DYLD_LIBRARY_PATH python --version && env -u DYLD_LIBRARY_PATH CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install --no-cache-dir --force-reinstall -e .)
+(cd "$ROOT_DIR/3rdparty/tvm-ffi" && env -u DYLD_LIBRARY_PATH python --version && env -u DYLD_LIBRARY_PATH CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install -e .)
+(cd "$ROOT_DIR" && env -u DYLD_LIBRARY_PATH python --version && env -u DYLD_LIBRARY_PATH CC="$CC" CXX="$CXX" LLVM_CONFIG="$LLVM_CONFIG" python -m pip install -e .)
 
 section "Synchronizing version metadata"
 (cd "$ROOT_DIR" && env -u DYLD_LIBRARY_PATH python version.py)
@@ -124,7 +124,7 @@ section "Install Sense Required Dependencies"
 (cd "$ROOT_DIR" && env -u DYLD_LIBRARY_PATH python -m pip install numpy psutil cloudpickle xgboost ml_dtypes onnx onnxruntime)
 
 section "Completed"
-info "export the runtime environment in your current shell:"
+info "RUN THIS CODE!!!!!"
 info "export TVM_HOME=$ROOT_DIR"
 info "export TVM_LIBRARY_PATH=$BUILD_DIR"
 info "export PYTHONPATH=$ROOT_DIR/python"
